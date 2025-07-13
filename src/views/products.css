@@ -1,0 +1,13 @@
+.container{
+    margin:24px;
+}
+img{
+    width: 80px;
+}
+tr{
+    transition: transform 0.3s ease;
+}
+  tr:hover {
+    transform: scale(1.05);
+   
+  }
