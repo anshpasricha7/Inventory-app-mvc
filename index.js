@@ -2,7 +2,7 @@ import express from 'express';
 import  ProductController  from './src/controllers/product.controller.js';
 import ejsLayouts from 'express-ejs-layouts';
 import path from 'path';
-
+import validateRequest from   './src/middlewares/validation.middleware.js';
 
 const server= express();
 
@@ -24,7 +24,7 @@ const productController = new ProductController();
 
 server.get('/', productController.getProducts);
 server.get(`/new` , productController.getAddForm);
-server.post('/' , productController.AddNewProduct);
+server.post('/' , validateRequest ,productController.AddNewProduct);
 server.use(express.static('src/views'));
 
 
