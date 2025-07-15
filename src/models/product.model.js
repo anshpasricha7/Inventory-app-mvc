@@ -28,6 +28,12 @@ export default class ProductModel {
     static getProductById(id){
         return products.find((product) => product.id === parseInt(id));
     }
+    static  delete(id) {
+        const index = products.findIndex((product) => product.id === parseInt(id));
+        
+            products.splice(index, 1);
+        
+    }
     
 }
 

@@ -28,6 +28,7 @@ server.post('/' , validateRequest ,productController.AddNewProduct);
 server.use(express.static('src/views'));
 server.get('/update_product/:id', productController.UpdateProduct);
 server.post('/updatevalues' , productController.postUpdateProduct);
+server.get('/delete_product/:id', productController.deleteProduct);
 
 
 server.listen(1000, () => {

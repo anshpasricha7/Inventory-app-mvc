@@ -7,7 +7,8 @@ img{
 tr{
     transition: transform 0.3s ease;
 }
-  tr:hover {
+
+tr:hover {
     transform: scale(1.05);
    
   }
