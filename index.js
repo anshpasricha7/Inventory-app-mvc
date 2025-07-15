@@ -26,7 +26,8 @@ server.get('/', productController.getProducts);
 server.get(`/new` , productController.getAddForm);
 server.post('/' , validateRequest ,productController.AddNewProduct);
 server.use(express.static('src/views'));
-
+server.get('/update_product/:id', productController.UpdateProduct);
+server.post('/updatevalues' , productController.postUpdateProduct);
 
 
 server.listen(1000, () => {

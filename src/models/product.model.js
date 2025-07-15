@@ -24,6 +24,10 @@ export default class ProductModel {
 );
         products.push(newproduct);
     }
+
+    static getProductById(id){
+        return products.find((product) => product.id === parseInt(id));
+    }
     
 }
 
