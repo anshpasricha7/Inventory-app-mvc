@@ -19,8 +19,12 @@ export default class ProductController{
     }
     
     AddNewProduct(req, res) {
+        console.log('File received:', req.file);
+
+        const {name, desc, price} = req.body;
+        const imageURL = "images/" + req.file.filename; //file is uploaded to 'public/images/' directory
        
-       ProductModel.add(req.body);
+       ProductModel.add(name , desc, price, imageURL);
        let products = ProductModel.getProducts();
        console.log(products);
         return res.render('products', { key: products });

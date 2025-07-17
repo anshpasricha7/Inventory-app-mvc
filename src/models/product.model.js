@@ -12,15 +12,15 @@ export default class ProductModel {
         return products;
     }
 
-    static add(productobj) {
+    static add(name, desc , price, imageURL) {
 
 
        let newproduct = new ProductModel(
   products.length + 1,
-  productobj.name,
-  productobj.desc, // desc goes here
-  productobj.price, // price goes here
-  productobj.imageURL // no need for template literal
+  name,
+  desc, // desc goes here
+  price, // price goes here
+  imageURL // no need for template literal
 );
         products.push(newproduct);
     }
