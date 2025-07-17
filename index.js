@@ -8,6 +8,7 @@ const server= express();
 
 //parse form data
 server.use(express.urlencoded({ extended: true }));
+server.use(express.static("public"));
 
 //setup view engine settings
 server.set('view engine', 'ejs');
@@ -28,7 +29,7 @@ server.post('/' , validateRequest ,productController.AddNewProduct);
 server.use(express.static('src/views'));
 server.get('/update_product/:id', productController.UpdateProduct);
 server.post('/updatevalues' , productController.postUpdateProduct);
-server.get('/delete_product/:id', productController.deleteProduct);
+server.post('/delete_product/:id', productController.deleteProduct);
 
 
 server.listen(1000, () => {
