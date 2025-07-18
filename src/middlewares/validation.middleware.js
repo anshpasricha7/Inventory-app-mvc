@@ -7,8 +7,11 @@ export default async function validateRequest(req, res, next){
     //1.Defining the Rules
     const rules = [
         body('name').notEmpty().withMessage('Name is not valid'),
-        body('price').isFloat({gt:0}).withMessage('Price is not valid')
-        // body('imageURL').isURL().withMessage('Image URL is not valid')
+        body('price').isFloat({gt:0}).withMessage('Price is not valid'),
+        body('imageURL').custom((value, {req}) => {
+            if(!req.file) throw new Error('Image is required');
+            return true;
+            })
     ];
 
 

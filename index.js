@@ -4,6 +4,7 @@ import ejsLayouts from 'express-ejs-layouts';
 import path from 'path';
 import validateRequest from   './src/middlewares/validation.middleware.js';
 import { uploadFile } from './src/middlewares/image-upload.middleware.js';
+import UserController from './src/controllers/user.controller.js';
 
 const server= express();
 
@@ -31,6 +32,12 @@ server.use(express.static('src/views'));
 server.get('/update_product/:id', productController.UpdateProduct);
 server.post('/updatevalues' , productController.postUpdateProduct);
 server.post('/delete_product/:id', productController.deleteProduct);
+
+const userController = new UserController();
+server.get('/register' , userController.getRegister);
+server.get('/login' , userController.getLogin); 
+server.post('/register' , userController.postRegister);
+server.post('/login', userController.postLogin);
 
 
 server.listen(1000, () => {
