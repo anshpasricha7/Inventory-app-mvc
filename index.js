@@ -7,6 +7,9 @@ import { uploadFile } from './src/middlewares/image-upload.middleware.js';
 import UserController from './src/controllers/user.controller.js';
 import session from 'express-session';
 import { auth } from './src/middlewares/auth.middleware.js';
+import cookieParser from 'cookie-parser';
+import { setLastVisit } from './src/middlewares/lastVisit.middleware.js';
+
 
 
 const server= express();
@@ -20,6 +23,8 @@ server.use(session({
   saveUninitialized: true,
   cookie: { secure: false } // Set to true if using HTTPS
 }));
+server.use(cookieParser());
+server.use(setLastVisit);
 
 //setup view engine settings
 server.set('view engine', 'ejs');
