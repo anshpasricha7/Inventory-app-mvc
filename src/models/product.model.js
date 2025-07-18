@@ -1,4 +1,5 @@
 export default class ProductModel {
+   static lastindex=3;
 
     constructor(id, name, desc , price , imageURL){
         this.id = id;
@@ -6,7 +7,9 @@ export default class ProductModel {
         this.desc = desc;
         this.price = price;
         this.imageURL = imageURL;
+        
     } 
+  
 
     static getProducts() {
         return products;
@@ -14,9 +17,9 @@ export default class ProductModel {
 
     static add(name, desc , price, imageURL) {
 
-
+ProductModel.lastindex++;
        let newproduct = new ProductModel(
-  products.length + 1,
+  ProductModel.lastindex ,
   name,
   desc, // desc goes here
   price, // price goes here

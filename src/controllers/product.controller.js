@@ -11,11 +11,11 @@ export default class ProductController{
 
         console.log(products) ;
 
-        res.render('products', { key: products }); //No need for the entire path as we did it in index.js view engine settings
+        res.render('products', { key: products, userEmail: req.session.userEmail  }); //No need for the entire path as we did it in index.js view engine settings
    
     }
     getAddForm(req, res) {
-       return res.render('new-product' , {errorMessage: null}); // Render the form to add a new product
+       return res.render('new-product' , {errorMessage: null, userEmail: req.session.userEmail }); // Render the form to add a new product
     }
     
     AddNewProduct(req, res) {
@@ -27,7 +27,7 @@ export default class ProductController{
        ProductModel.add(name , desc, price, imageURL);
        let products = ProductModel.getProducts();
        console.log(products);
-        return res.render('products', { key: products });
+        return res.render('products', { key: products , userEmail: req.session.userEmail });
     }
 
     UpdateProduct(req , res, next){
@@ -37,7 +37,7 @@ export default class ProductController{
         console.log(productFound);
 
         if(productFound){
-            return res.render('update_product' , {errorMessage: null , product: productFound}); // Render the form to update the product
+            return res.render('update_product' , {errorMessage: null , product: productFound, userEmail: req.session.userEmail }); // Render the form to update the product
         }
         else{
             res.status(401).send('Product not found');
@@ -57,7 +57,7 @@ export default class ProductController{
          requiredproduct.price = req.body.price;
          requiredproduct.imageURL = req.body.imageURL;
          
-         return res.render('products'  ,{key: products} );
+         return res.render('products'  ,{key: products, userEmail: req.session.userEmail } );
 
     }
     deleteProduct(req, res) {
@@ -70,8 +70,16 @@ export default class ProductController{
         ProductModel.delete(id);
          let products = ProductModel.getProducts();
        console.log(products);
-         res.render('products', { key: products });
+         res.render('products', { key: products , userEmail: req.session.userEmail });
         }
+    }
+    logout(req, res) {
+        req.session.destroy(function(err){
+            if(err)
+            console.log("Session ended");
+        else res.redirect('/login'); // Redirect to login page after logout
+
+        })
     }
 
 }
